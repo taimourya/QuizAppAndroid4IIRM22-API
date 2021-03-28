@@ -2,22 +2,21 @@ package com.example.quiz.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Question {
+public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionID;
     private String question;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    private Set<Reponse> reponses = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "reponseID")
-    private Reponse reponseCorrect;
+
 
     public Long getQuestionID() {
         return questionID;
@@ -35,19 +34,5 @@ public class Question {
         this.question = question;
     }
 
-    public Set<Reponse> getReponses() {
-        return reponses;
-    }
 
-    public void setReponses(Set<Reponse> reponses) {
-        this.reponses = reponses;
-    }
-
-    public Reponse getReponseCorrect() {
-        return reponseCorrect;
-    }
-
-    public void setReponseCorrect(Reponse reponseCorrect) {
-        this.reponseCorrect = reponseCorrect;
-    }
 }

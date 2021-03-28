@@ -1,14 +1,19 @@
 package com.example.quiz.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Reponse {
+public class Reponse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reponseID;
     private String reponse;
+    private boolean isCorrect;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "questionID")
     private Question question;
@@ -36,4 +41,5 @@ public class Reponse {
     public void setQuestion(Question question) {
         this.question = question;
     }
+
 }
