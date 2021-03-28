@@ -1,12 +1,12 @@
 package com.example.quiz.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Question implements Serializable {
@@ -16,7 +16,13 @@ public class Question implements Serializable {
     private String question;
 
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
+    private List<Reponse> reponses = new ArrayList<>();
 
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "reponseID")
+    private Reponse reponse;
 
     public Long getQuestionID() {
         return questionID;
@@ -34,5 +40,19 @@ public class Question implements Serializable {
         this.question = question;
     }
 
+    public List<Reponse> getReponses() {
+        return reponses;
+    }
 
+    public void setReponses(List<Reponse> reponses) {
+        this.reponses = reponses;
+    }
+
+    public Reponse getReponse() {
+        return reponse;
+    }
+
+    public void setReponse(Reponse reponse) {
+        this.reponse = reponse;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.quiz.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -11,9 +12,8 @@ public class Reponse implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reponseID;
     private String reponse;
-    private boolean isCorrect;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "questionID")
     private Question question;

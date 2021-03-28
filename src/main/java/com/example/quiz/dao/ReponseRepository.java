@@ -14,4 +14,5 @@ public interface ReponseRepository extends JpaRepository<Reponse, Long> {
 
     @Query("SELECT r FROM Reponse r WHERE r.question = ?1")
     public Collection<Reponse> getReponsesByQuestion(Question question);
+
 }
